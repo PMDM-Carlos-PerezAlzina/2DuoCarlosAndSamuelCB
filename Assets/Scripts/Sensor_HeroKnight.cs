@@ -1,8 +1,9 @@
-﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Sensor_HeroKnight : MonoBehaviour {
-
+public class Sensor_HeroKnight : MonoBehaviour
+{
     private int m_ColCount = 0;
 
     private float m_DisableTimer;
