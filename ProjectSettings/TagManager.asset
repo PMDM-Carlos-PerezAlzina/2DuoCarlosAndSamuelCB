@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Antorcha
+    uniqueID: 231698423
+    locked: 0
+  - name: Fondo
+    uniqueID: 1849702939
+    locked: 0
+  - name: ObjetosMapa
+    uniqueID: 3447861459
+    locked: 0
