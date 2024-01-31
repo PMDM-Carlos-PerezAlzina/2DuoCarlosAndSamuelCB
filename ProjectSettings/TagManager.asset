@@ -41,12 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Antorcha
-    uniqueID: 231698423
+  - name: Background
+    uniqueID: 94900765
     locked: 0
-  - name: Fondo
-    uniqueID: 1849702939
+  - name: Eviroment
+    uniqueID: 2293354171
     locked: 0
-  - name: ObjetosMapa
-    uniqueID: 3447861459
+  - name: Items
+    uniqueID: 3167719885
+    locked: 0
+  - name: CharacterEnemy
+    uniqueID: 4284386737
+    locked: 0
+  - name: Foreground
+    uniqueID: 1798038981
+    locked: 0
+  - name: Torch
+    uniqueID: 1790849685
     locked: 0
