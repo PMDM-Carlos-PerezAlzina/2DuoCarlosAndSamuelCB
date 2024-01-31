@@ -377,7 +377,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.018718183}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -388,7 +388,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 0.76}
+  m_Size: {x: 0.98, y: 0.7225636}
   m_EdgeRadius: 0
 --- !u!1 &224597236
 GameObject:
@@ -402,6 +402,7 @@ GameObject:
   - component: {fileID: 224597239}
   - component: {fileID: 224597241}
   - component: {fileID: 224597242}
+  - component: {fileID: 224597243}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -539,6 +540,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distancia: 10
+--- !u!58 &224597243
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224597236}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!1001 &526822869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -646,8 +682,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.32875, y: 0.7051, z: 0}
-    m_Extent: {x: 1.24105, y: 1.1972001, z: 0}
+    m_Center: {x: -0.0023500025, y: 0.66464996, z: 0}
+    m_Extent: {x: 0.87275004, y: 1.10375, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -658,17 +694,10 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 0.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.45494986, y: 0.017407894, z: 0}
-  - {x: -0.24406433, y: 0.04563427, z: 0}
-  - {x: -0.02308178, y: 0.42292762, z: 0}
-  - {x: 0.13541174, y: 0.034821033, z: 0}
-  - {x: 0.3575306, y: 0.0060739517, z: 0}
-  - {x: 0.3367567, y: 0.4728508, z: 0}
-  - {x: 0.3995347, y: 0.6277814, z: 0}
-  - {x: 0.41247892, y: 1.0258334, z: 0}
-  - {x: 0.006093502, y: 1.4026294, z: 0}
-  - {x: -0.471673, y: 0.9823916, z: 0}
-  - {x: -1.0709248, y: 0.29674196, z: 0}
+  - {x: -0.37538147, y: 0.06833124, z: 0}
+  - {x: 0.3702612, y: 0.060180187, z: 0}
+  - {x: 0.36792135, y: 1.2677193, z: 0}
+  - {x: -0.36664343, y: 1.2529223, z: 0}
 --- !u!1 &735455568
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,7 +981,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.017008409}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -963,7 +992,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 0.76}
+  m_Size: {x: 0.98, y: 0.72598314}
   m_EdgeRadius: 0
 --- !u!1 &1625761352
 GameObject:
@@ -1082,7 +1111,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.017715767}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1093,7 +1122,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 0.76}
+  m_Size: {x: 0.98, y: 0.7245685}
   m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
