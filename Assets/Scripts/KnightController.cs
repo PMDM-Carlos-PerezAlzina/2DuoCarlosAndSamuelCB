@@ -17,6 +17,7 @@ public class KnightController : MonoBehaviour
     private Sensor_HeroKnight   m_wallSensorR2;
     private Sensor_HeroKnight   m_wallSensorL1;
     private Sensor_HeroKnight   m_wallSensorL2;
+    public GameObject knightColliderContainer;
     private bool                m_isWallSliding = false;
     private bool                m_grounded = false;
     private bool                m_rolling = false;
@@ -75,11 +76,17 @@ public class KnightController : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = false;
             m_facingDirection = 1;
         }
-            
         else if (inputX < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
             m_facingDirection = -1;
+        }
+
+        // Mueve el Collider junto con el personaje
+        if (knightColliderContainer != null)
+        {
+            float newXPosition = m_facingDirection == -1 ? -1f : 0f;
+            knightColliderContainer.transform.position = new Vector3(newXPosition, GameObject.Find("HeroKnight").transform.position.y, GameObject.Find("HeroKnight").transform.position.z);
         }
 
         // Move
