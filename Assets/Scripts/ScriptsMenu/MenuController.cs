@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    public AudioSource buttonSound; // El AudioSource que reproducirá el sonido
 
     public void PlayGame()
     {
@@ -45,9 +44,19 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    private void PlaySound()
+private void PlaySound()
+{
+    // Find the SoundButton object
+    GameObject soundButtonObject = GameObject.Find("SoundButton");
+    if (soundButtonObject != null)
     {
-        // Reproduce el sonido
-        buttonSound.Play();
+        // Get the SoundButton component and play the sound
+        SoundButton soundButton = soundButtonObject.GetComponent<SoundButton>();
+        if (soundButton != null)
+        {
+            soundButton.PlaySound();
+        }
     }
+}
+
 }
