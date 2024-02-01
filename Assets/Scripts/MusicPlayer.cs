@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
-    public static MusicPlayer instance = null; // Instancia estática del MusicPlayer
+    public static MusicPlayer instance = null; // Instancia estï¿½tica del MusicPlayer
 
     public AudioSource audioSource;
-    private bool isMuted = false; // Variable para controlar si la música está silenciada
+    private bool isMuted = false; // Variable para controlar si la mï¿½sica estï¿½ silenciada
 
     void Awake()
     {
@@ -25,8 +25,8 @@ public class MusicPlayer : MonoBehaviour
 
     void Start()
     {
-        audioSource.loop = true; // Habilita la reproducción en bucle
-        audioSource.Play(); // Comienza a reproducir la canción
+        audioSource.loop = true; // Habilita la reproducciï¿½n en bucle
+        audioSource.Play(); // Comienza a reproducir la canciï¿½n
     }
 
     public void ToggleMute()
@@ -35,12 +35,12 @@ public class MusicPlayer : MonoBehaviour
 
         if (isMuted)
         {
-            // Si la música está silenciada, la reanuda
+            // Si la mï¿½sica estï¿½ silenciada, la reanuda
             audioSource.UnPause();
         }
         else
         {
-            // Si la música está sonando, la silencia
+            // Si la mï¿½sica estï¿½ sonando, la silencia
             audioSource.Pause();
         }
     }
@@ -48,5 +48,9 @@ public class MusicPlayer : MonoBehaviour
     public bool IsMutedMusic()
     {
         return isMuted;
+    }
+
+    public void SetVolume(float volume){
+        audioSource.volume = volume;
     }
 }
