@@ -2,24 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BurningGhoulController : EnemyInterface
+public class DestroyFire : MonoBehaviour
 {
-    public GameObject deathObject;
     // Start is called before the first frame update
     void Start()
     {
-        
+        float tiempoParaDestruccion = 0.68333f;
+        Destroy(gameObject, tiempoParaDestruccion);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (base.life <= 0) {
-            base.Die(gameObject, deathObject);
-        }
-    }
-
-    public override void Move(){
         
     }
 }

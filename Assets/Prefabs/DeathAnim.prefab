@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6265971828109304664}
   - component: {fileID: 8427265108556442220}
   - component: {fileID: 5486218415140214115}
+  - component: {fileID: -2298042902873203274}
   m_Layer: 0
   m_Name: DeathAnim
   m_TagString: Untagged
@@ -158,3 +159,15 @@ MonoBehaviour:
   - {x: 0.08962275, y: -0.10877632, z: 0}
   - {x: -0.0015696741, y: 0.1222814, z: 0}
   - {x: -0.07357885, y: -0.11385687, z: 0}
+--- !u!114 &-2298042902873203274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744081282459181697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872bcb6ff8079304aa90cedba127e4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

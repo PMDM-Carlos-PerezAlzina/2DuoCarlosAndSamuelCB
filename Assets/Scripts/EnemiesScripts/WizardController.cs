@@ -3,6 +3,7 @@ using UnityEngine;
 public class WizardController : EnemyInterface
 {
     private Animator wizardAnimator;
+    public GameObject deathObject;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,12 @@ public class WizardController : EnemyInterface
     // Update is called once per frame
     void Update()
     {
-        // Aquí puedes poner lógica adicional si es necesario
+        if (base.life <= 0) {
+            base.Die(gameObject, deathObject);
+        }
+    }
+
+    public override void Move(){
+        
     }
 }
