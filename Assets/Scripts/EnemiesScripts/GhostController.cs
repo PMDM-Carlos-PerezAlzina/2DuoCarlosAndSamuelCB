@@ -5,52 +5,73 @@ using UnityEngine;
 public class GhostController : EnemyInterface
 {
     public GameObject deathObject;
+    public Rigidbody2D rb2d;
     [SerializeField] private float moveSpeed = 2.0f;
-    [SerializeField] private float stepDistance = 2.0f; // Ajusta el valor en el editor
-    [SerializeField] private float flipSpeed = 5.0f; // Ajusta el valor en el editor para controlar la velocidad del giro
-    private Vector3 initialPosition;
-    private int m_facingDirection = -1;
+    public LayerMask down;
+    public LayerMask front;
+    public float distanceDown;
+    public float distanceFront;
+    public Transform downController;
+    public Transform frontController;
+    public bool downInformation;
+    public bool frontInformation;
+    private bool isLookingRight = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        initialPosition = transform.position;
-    }
+    public float followDistance = 5.0f;  // Definir la distancia a la que el ghost empezará a seguir al jugador
+    public Transform player;  // Referencia al objeto del jugador
 
     // Update is called once per frame
     void Update()
     {
-        if (base.life <= 0)
+        if (life <= 0)
         {
             base.Die(gameObject, deathObject);
         }
 
-        CheckDirectionChange();
-        Move();
-        RotateGhost(); // Nueva función para manejar la rotación del sprite
-    }
+        // Calcular la distancia entre el ghost y el jugador
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-    private void CheckDirectionChange()
-    {
-        float step = Mathf.PingPong(Time.time * moveSpeed, stepDistance * 2) - stepDistance;
-
-        // Verificar si es necesario cambiar de dirección
-        if ((step < 0 && m_facingDirection > 0) || (step >= 0 && m_facingDirection < 0))
+        // Si la distancia es menor que la distancia de seguimiento, seguir al jugador
+        if (distanceToPlayer < followDistance)
         {
-            // Cambiar de dirección
-            m_facingDirection *= -1;
+            // Calcular la dirección hacia el jugador
+            float direction = Mathf.Sign(player.position.x - transform.position.x);
+
+            // Mover el ghost hacia el jugador
+            rb2d.velocity = new Vector2(moveSpeed * direction, rb2d.velocity.y);
+
+            // Voltear el ghost según la dirección hacia el jugador
+            if ((direction > 0 && !isLookingRight) || (direction < 0 && isLookingRight))
+            {
+                Flip();
+            }
+        }
+        else
+        {
+            // Si el jugador está fuera de la distancia de seguimiento, continuar moviéndose en la dirección predeterminada
+            rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
+
+            frontInformation = Physics2D.Raycast(frontController.position, transform.right, distanceFront, front);
+            downInformation = Physics2D.Raycast(downController.position, transform.up * -1, distanceDown, down);
+
+            if (frontInformation || !downInformation)
+            {
+                Flip();
+            }
         }
     }
 
-    private void RotateGhost()
+    private void Flip()
     {
-        // Gira gradualmente hacia la nueva dirección
-        transform.localScale = new Vector3(m_facingDirection, 1, 1);
+        isLookingRight = !isLookingRight;
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+        moveSpeed = moveSpeed * -1;
     }
 
-    public override void Move()
+    private void OnDrawGizmos()
     {
-        float step = Mathf.PingPong(Time.time * moveSpeed, stepDistance * 2) - stepDistance;
-        transform.position = new Vector3(initialPosition.x + step, transform.position.y, transform.position.z);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(downController.transform.position, downController.transform.position + transform.up * -1 * distanceDown);
+        Gizmos.DrawLine(frontController.transform.position, frontController.transform.position + transform.right * distanceFront);
     }
 }

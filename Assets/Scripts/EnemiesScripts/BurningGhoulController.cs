@@ -18,8 +18,4 @@ public class BurningGhoulController : EnemyInterface
             base.Die(gameObject, deathObject);
         }
     }
-
-    public override void Move(){
-        
-    }
 }

@@ -107,10 +107,10 @@ public class KnightController : MonoBehaviour
             FlipCharacter(true);
         }
 
-        // Mover el Collider junto con el personaje
-        MoveColliderWithCharacter(inputX);
+        // Move the collider with the player
+        MoveColliderWithCharacter();
 
-        // Mover
+        // Move
         if (!m_rolling)
             m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
 
@@ -187,7 +187,7 @@ public class KnightController : MonoBehaviour
        }
     }
 
-    private void MoveColliderWithCharacter(float inputX)
+    private void MoveColliderWithCharacter()
     {
         if (knightColliderContainer != null)
         {
@@ -270,22 +270,12 @@ public class KnightController : MonoBehaviour
         m_groundSensor.Disable(0.2f);
     }
 
-    // Función de evento para la animación de deslizamiento de polvo
-    void AE_SlideDust()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Vector3 spawnPosition;
-
-        if (m_facingDirection == 1)
-            spawnPosition = m_wallSensorR2.transform.position;
-        else
-            spawnPosition = m_wallSensorL2.transform.position;
-
-        if (m_slideDust != null)
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            // Establecer la posición de spawn correcta
-            GameObject dust = Instantiate(m_slideDust, spawnPosition, gameObject.transform.localRotation) as GameObject;
-            // Girar el polvo en la dirección correcta
-            dust.transform.localScale = new Vector3(m_facingDirection, 1, 1);
+            // Realizar acciones específicas cuando colisiona con un enemigo
+            Debug.Log("Ghost ha colisionado con un enemigo");
         }
     }
 }

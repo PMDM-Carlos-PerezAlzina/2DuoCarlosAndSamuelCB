@@ -34,7 +34,4 @@ public abstract class EnemyInterface : MonoBehaviour
         // Obtener el Animator del nuevo GameObject
         Animator deathAnimator = deathAnimation.GetComponent<Animator>();
     }
-
-
-    public abstract void Move();
 }

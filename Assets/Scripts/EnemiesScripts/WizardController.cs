@@ -32,8 +32,4 @@ public class WizardController : EnemyInterface
             base.Die(gameObject, deathObject);
         }
     }
-
-    public override void Move(){
-        
-    }
 }

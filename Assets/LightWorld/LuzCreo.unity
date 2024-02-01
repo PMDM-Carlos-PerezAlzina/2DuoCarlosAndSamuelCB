@@ -1009,6 +1009,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 4180508866736839352, guid: dbcd0d8f80a89a0de963dbd4add334a7, type: 3}
+      propertyPath: distanceDown
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4180508866736839352, guid: dbcd0d8f80a89a0de963dbd4add334a7, type: 3}
+      propertyPath: distanceFront
+      value: 0.82
+      objectReference: {fileID: 0}
     - target: {fileID: 6697622002375320895, guid: dbcd0d8f80a89a0de963dbd4add334a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.34
