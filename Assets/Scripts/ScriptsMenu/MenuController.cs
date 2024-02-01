@@ -3,37 +3,51 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    public AudioSource buttonSound; // El AudioSource que reproducir� el sonido
+
     public void PlayGame()
     {
-        // Carga la escena del juego
+        PlaySound();
         SceneManager.LoadScene("GameScene");
     }
 
     public void OpenSettings()
     {
-        // Carga la escena de configuración
+        PlaySound();
         SceneManager.LoadScene("Settings");
     }
 
     public void OpenHowTo()
     {
-        // Carga la escena de cómo jugar
+        PlaySound();
         SceneManager.LoadScene("HowTo");
     }
 
     public void OpenInfo()
     {
-        // Carga la escena de información
+        PlaySound();
         SceneManager.LoadScene("Info");
     }
 
     public void ExitGame()
     {
-        // Sale del juego
+        PlaySound();
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else
             Application.Quit();
         #endif
+    }
+
+    public void BackMainMenu()
+    {
+        PlaySound();
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    private void PlaySound()
+    {
+        // Reproduce el sonido
+        buttonSound.Play();
     }
 }
