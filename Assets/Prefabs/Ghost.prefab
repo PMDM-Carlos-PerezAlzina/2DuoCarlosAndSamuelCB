@@ -258,10 +258,7 @@ MonoBehaviour:
     m_Bits: 8
   front:
     serializedVersion: 2
-    m_Bits: 200
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 136
   distanceDown: 1.2
   distanceFront: 0.5
   downController: {fileID: 7291751066418604683}
