@@ -11,9 +11,11 @@ public class KnightController : MonoBehaviour
     [SerializeField] private bool m_noBlood = false;
     [SerializeField] private GameObject m_slideDust;
     [SerializeField] private Vector2 reboundSpeed;
-    [SerializeField] private int life = 100;
-    [SerializeField] private int damageAttack = 20;
+    public int torchQuantity = 3;
+    public int lifePotionQuantity = 1;
+    public int sanityPotionQuantity = 1;
 
+    public float life = 100f;
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private Sensor_HeroKnight m_groundSensor;
@@ -30,15 +32,21 @@ public class KnightController : MonoBehaviour
     private float m_delayToIdle = 0.0f;
     private float m_rollDuration = 8.0f / 14.0f;
     private float m_rollCurrentTime;
-    private float sanity = 100f;
+    public float sanity = 100f;
     private float lastDamageTime;
     public float damageCooldown = 5f;
     public float damageRadius = 5f;
+    public GameObject torch;
+    private bool isInsideLight = false;
+    public GameObject enemyPrefab1;
+    public GameObject enemyPrefab2;
+    public GameObject enemyPrefab3;
 
     // Start is called before the first frame update
     void Start()
     {
         InitializeComponents();
+        InvokeRepeating("DecreaseSanityEverySecond", 0f, 1f);
     }
 
     // Update is called once per frame
@@ -145,7 +153,7 @@ public class KnightController : MonoBehaviour
         // Bloquear
         else if (Input.GetMouseButtonDown(1) && !m_rolling)
         {
-            TriggerBlockAnimation();
+            Instantiate(torch, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
         }
 
         else if (Input.GetMouseButtonUp(1))
@@ -271,7 +279,10 @@ public class KnightController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Light")) {
+            isInsideLight = true;
+        }
+        if (other.CompareTag("Enemy") || other.CompareTag("Trap"))
         {
             if (other.GetComponent<WizardController>() != null)
             {
@@ -289,16 +300,89 @@ public class KnightController : MonoBehaviour
             m_animator.SetTrigger("Hurt");
             TakeDamage();
         }
+        if (other.CompareTag("EndFirstLevel")) {
+            SceneManager.LoadScene("SecondLevel");
+        }
+        if (other.CompareTag("EndSecondLevel")) {
+            SceneManager.LoadScene("WinLevelScene");
+        }
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Light")) {
+            isInsideLight = false;
+        }
+    }
+
+    private void SpawnRandomEnemies(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            // Seleccionar aleatoriamente entre los tres prefabs
+            GameObject selectedPrefab = GetRandomEnemyPrefab();
+
+            // Calcular la posición en el eje X entre 0 y 191
+            float randomX = Random.Range(0f, 192f);
+
+            // Fijar la posición en el eje Y a una altura constante de 2
+            float fixedY = 2f;
+
+            // Hacer spawn del enemigo en la posición aleatoria
+            Instantiate(selectedPrefab, new Vector3(randomX, fixedY, 0f), Quaternion.identity);
+        }
+    }
+
+    private GameObject GetRandomEnemyPrefab()
+    {
+        int randomIndex = Random.Range(0, 3);
+
+        switch (randomIndex)
+        {
+            case 0:
+                return enemyPrefab1;
+            case 1:
+                return enemyPrefab2;
+            case 2:
+                return enemyPrefab3;
+            default:
+                return enemyPrefab1;
+        }
+    }
+
+    private void DecreaseSanityEverySecond()
+    {
+        if (!isInsideLight)
+        {
+            if (sanity > 0)
+            {
+                sanity -= 1f;
+            }
+            Debug.Log("Sanity: " + sanity);
+
+            if (sanity <= 0)
+            {
+                // Hacer spawn de 20 enemigos de manera aleatoria
+                SpawnRandomEnemies(10);
+
+                // Comenzar a disminuir la vida cada segundo
+                InvokeRepeating("DecreaseLifeEverySecond", 0f, 7.5f);
+            }
+        }
+    }
+
+    private void DecreaseLifeEverySecond()
+    {
+        life -= 1;
+        Debug.Log("Hero life: " + life);
+    }
 
     public void TakeDamage()
     {
-        life -= 20;
+        life -= GameManager.damagePlayer;
 
-        // Aplicar fuerza hacia atrás al recibir daño
         Vector2 knockbackForce = new Vector2(-5f * m_facingDirection, 5f);
-        m_body2d.velocity = Vector2.zero; // Detener el movimiento actual antes de aplicar la fuerza
+        m_body2d.velocity = Vector2.zero; 
         m_body2d.AddForce(knockbackForce, ForceMode2D.Impulse);
     }
 }
