@@ -364,7 +364,6 @@ public class KnightController : MonoBehaviour
             {
                 sanity -= 1f;
             }
-            Debug.Log("Sanity: " + sanity);
 
             if (sanity <= 0)
             {
@@ -380,7 +379,6 @@ public class KnightController : MonoBehaviour
     private void DecreaseLifeEverySecond()
     {
         life -= 1;
-        Debug.Log("Hero life: " + life);
     }
 
     public void TakeDamage()
@@ -390,5 +388,17 @@ public class KnightController : MonoBehaviour
         Vector2 knockbackForce = new Vector2(-5f * m_facingDirection, 5f);
         m_body2d.velocity = Vector2.zero; 
         m_body2d.AddForce(knockbackForce, ForceMode2D.Impulse);
+    }
+
+    public void IncreasePotionSanity() {
+        sanityPotionQuantity++;
+    }
+
+    public void IncreasePotionLife() {
+        lifePotionQuantity++;
+    }
+
+    public void IncreaseTorch() {
+        torchQuantity++;
     }
 }
