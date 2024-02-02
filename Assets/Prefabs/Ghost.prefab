@@ -59,7 +59,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -10580559
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &4164818435956751679
@@ -262,6 +262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 390378597819763434}
+  - component: {fileID: 8189168274715332664}
   m_Layer: 0
   m_Name: FrontController
   m_TagString: Untagged
@@ -278,12 +279,62 @@ Transform:
   m_GameObject: {fileID: 1525974012991433055}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0418, y: 0, z: 0}
+  m_LocalPosition: {x: -0.016, y: -0.121, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6697622002375320895}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8189168274715332664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525974012991433055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 000000001d12a805bbceb188cd91cfbcb18d5effc5e52b6b9532be6a
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0.007249996, y: 0.4013, z: 0}
+    m_Extent: {x: 0.15895, y: 0.037300006, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0.2
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.01
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.14150819, y: 0.37503046, z: 0}
+  - {x: 0.15606236, y: 0.3772877, z: 0}
+  - {x: 0.15429172, y: 0.42217597, z: 0}
+  - {x: -0.14107828, y: 0.42826363, z: 0}
 --- !u!1 &3842532864880808580
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +525,7 @@ MonoBehaviour:
   frontController: {fileID: 390378597819763434}
   downInformation: 0
   frontInformation: 0
+  ghostImage: {fileID: 104125818054266854}
 --- !u!50 &8806670556583728544
 Rigidbody2D:
   serializedVersion: 4

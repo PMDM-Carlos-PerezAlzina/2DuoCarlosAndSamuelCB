@@ -294,28 +294,38 @@ public class KnightController : MonoBehaviour
         m_timeSinceAttack = 0.0f;
     }
     private void HandleAttack()
+{
+    // Posición del jugador
+    Vector3 playerPosition = transform.position;
+
+    // Obtener los colliders de los objetos dentro del área de daño
+    Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPosition, damageRadius);
+    
+    foreach (Collider2D collider in colliders)
     {
-        // Posición del jugador
-        Vector3 playerPosition = transform.position;
+        // Verificar la presencia de scripts específicos
+        WizardController wizardEnemy = collider.GetComponent<WizardController>();
+        BurningGhoulController burningHostEnemy = collider.GetComponent<BurningGhoulController>();
+        GhostController ghostEnemy = collider.GetComponent<GhostController>();
 
-        // Obtener los colliders de los objetos dentro del área de daño
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPosition, damageRadius);
-        
-        foreach (Collider2D collider in colliders)
+        // Aplicar daño según el tipo de enemigo
+        if (wizardEnemy != null)
         {
-            // Aplicar daño a los objetos en el radio del ataque
-            if (collider.CompareTag("Enemy"))
-            {
-                EnemyInterface enemy = collider.GetComponent<EnemyInterface>();
-
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(); // Llama al método de la interfaz
-                    soundHitSwordMosnter.Play();
-                }
-            }
+            wizardEnemy.TakeDamage();
+            soundHitSwordMosnter.Play();
+        }
+        else if (burningHostEnemy != null)
+        {
+            burningHostEnemy.TakeDamage();
+            soundHitSwordMosnter.Play();
+        }
+        else if (ghostEnemy != null)
+        {
+            ghostEnemy.TakeDamage();
+            soundHitSwordMosnter.Play();
         }
     }
+}
 
 
     private void PerformJump()

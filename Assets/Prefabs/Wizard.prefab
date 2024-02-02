@@ -249,7 +249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.028, y: 0.228}
+  m_AnchoredPosition: {x: 0.028, y: 0.143}
   m_SizeDelta: {x: 1004, y: 504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8713665214213212306
@@ -272,7 +272,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -10580559
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7598494206652586840
@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 3938117283069413441}
   - component: {fileID: 6661017496694565333}
   - component: {fileID: 1847813841511802219}
+  - component: {fileID: 7440607077935162712}
   m_Layer: 6
   m_Name: Wizard
   m_TagString: Enemy
@@ -454,6 +455,7 @@ MonoBehaviour:
   frontController: {fileID: 889063998939057570}
   downInformation: 0
   frontInformation: 0
+  wizardImage: {fileID: 8413837164369786564}
 --- !u!50 &6661017496694565333
 Rigidbody2D:
   serializedVersion: 4
@@ -516,3 +518,53 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0041236877, y: -0.11493158}
   m_Size: {x: 0.34964722, y: 0.4221078}
   m_Direction: 0
+--- !u!114 &7440607077935162712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8762367356632381820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 000000001d12a805bbceb188cd91cfbcb18d5effc5e52b6b9532be6a
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0.031000003, y: 0.22420001, z: 0}
+    m_Extent: {x: 0.2402, y: 0.1322, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.1
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.106431074, y: 0.19295062, z: 0}
+  - {x: 0.17107385, y: 0.20030719, z: 0}
+  - {x: 0.17125665, y: 0.25567943, z: 0}
+  - {x: -0.1086711, y: 0.25181657, z: 0}

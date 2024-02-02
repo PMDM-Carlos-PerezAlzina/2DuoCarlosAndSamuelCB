@@ -285,8 +285,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.016049996, y: 0.042000003, z: 0}
-    m_Extent: {x: 0.20375, y: 0.17480001, z: 0}
+    m_Center: {x: -0.0042999983, y: 0.108849995, z: 0}
+    m_Extent: {x: 0.2646, y: 0.24164999, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.25
@@ -299,8 +299,8 @@ MonoBehaviour:
   m_ShapePath:
   - {x: -0.109017365, y: -0.022513663, z: 0}
   - {x: 0.04850993, y: -0.0066976896, z: 0}
-  - {x: 0.078911796, y: 0.0704645, z: 0}
-  - {x: -0.109113686, y: 0.10868896, z: 0}
+  - {x: 0.15133126, y: 0.23588733, z: 0}
+  - {x: -0.16031362, y: 0.24017045, z: 0}
 --- !u!114 &3342911190343639238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +328,7 @@ MonoBehaviour:
   frontController: {fileID: 7234030250691887696}
   downInformation: 0
   frontInformation: 0
+  burningBar: {fileID: 8619702601582887626}
 --- !u!50 &2670202582795461305
 Rigidbody2D:
   serializedVersion: 4
@@ -524,7 +525,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -10580559
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6578729900698621752

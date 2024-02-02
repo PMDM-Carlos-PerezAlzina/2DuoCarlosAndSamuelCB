@@ -207,9 +207,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3342911190343639238, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
+      propertyPath: burningBar
+      value: 
+      objectReference: {fileID: 936793513}
     - target: {fileID: 4742267209714280249, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
       propertyPath: m_Name
       value: BurningGhoul (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7270809226502249716, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -10580559
       objectReference: {fileID: 0}
     - target: {fileID: 7419523679321023591, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
       propertyPath: m_LocalPosition.x
@@ -249,6 +257,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7419523679321023591, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153676300222587237, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -52131,6 +52143,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4bb57993f0f20e4bbf8f686f042ac3f, type: 3}
+--- !u!114 &936793513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8619702601582887626, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
+  m_PrefabInstance: {fileID: 42306023}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &952703733
 GameObject:
   m_ObjectHideFlags: 0
@@ -70944,6 +70967,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3342911190343639238, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
+      propertyPath: burningBar
+      value: 
+      objectReference: {fileID: 1536475779}
     - target: {fileID: 4742267209714280249, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
       propertyPath: m_Name
       value: BurningGhoul
@@ -71015,7 +71042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6697622002375320895, guid: dbcd0d8f80a89a0de963dbd4add334a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.230446
+      value: 29.654
       objectReference: {fileID: 0}
     - target: {fileID: 6697622002375320895, guid: dbcd0d8f80a89a0de963dbd4add334a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -71058,6 +71085,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbcd0d8f80a89a0de963dbd4add334a7, type: 3}
+--- !u!114 &1536475779 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8619702601582887626, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
+  m_PrefabInstance: {fileID: 1496036520}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1585394082
 GameObject:
   m_ObjectHideFlags: 0
@@ -71393,7 +71431,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.04
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 000000001d12a805bbceb188cd91cfbcb18d5effc5e52b6b
