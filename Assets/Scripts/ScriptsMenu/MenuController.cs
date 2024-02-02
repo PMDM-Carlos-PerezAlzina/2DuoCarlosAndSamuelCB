@@ -7,7 +7,13 @@ public class MenuController : MonoBehaviour
     public void PlayGame()
     {
         PlaySound();
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("FirstLevel");
+    }
+
+    public void PlaySecondLevel()
+    {
+        PlaySound();
+        SceneManager.LoadScene("SecondLevel");
     }
 
     public void OpenSettings()

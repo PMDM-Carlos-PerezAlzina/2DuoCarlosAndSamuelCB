@@ -3,14 +3,13 @@ using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour
 {
-    public Image imageMuted; // La imagen para cuando la música está silenciada
-    public Image imageNotMuted; // La imagen para cuando la música está sonando
-
-
+    public Sprite imageMuted; // La imagen para cuando la música está silenciada
+    public Sprite imageNotMuted; // La imagen para cuando la música está sonando
+    public Image imageMusic;
 
     public void ToggleMute()
     {
-        // Encuentra el objeto MusicPlayer en la escena
+
         MusicPlayer musicPlayer = FindObjectOfType<MusicPlayer>();
 
         if (musicPlayer != null)
@@ -21,13 +20,11 @@ public class SettingsController : MonoBehaviour
             // Cambia la visibilidad de las imágenes dependiendo de si la música está silenciada o no
             if (musicPlayer.IsMutedMusic())
             {
-                imageMuted.enabled = true;
-                imageNotMuted.enabled = false;
+                imageMusic.sprite = imageMuted; // Cambia el sprite a la imagen de música silenciada
             }
             else
             {
-                imageMuted.enabled = false;
-                imageNotMuted.enabled = true;
+                imageMusic.sprite = imageNotMuted; // Cambia el sprite a la imagen de música no silenciada
             }
         }
         else
@@ -35,4 +32,5 @@ public class SettingsController : MonoBehaviour
             Debug.Log("No se encontró el objeto MusicPlayer");
         }
     }
+
 }
