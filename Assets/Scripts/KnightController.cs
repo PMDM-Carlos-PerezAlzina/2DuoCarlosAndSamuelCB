@@ -43,8 +43,12 @@ public class KnightController : MonoBehaviour
     public GameObject enemyPrefab2;
     public GameObject enemyPrefab3;
     public Canvas canvas;
+    public Button objectButton;
     private bool isLeftButtonPressed = false;
     private bool isRightButtonPressed = false;
+    private float inputX;
+    public Sprite[] sprites;
+    public Image imageButton;
 
 
     // Start is called before the first frame update
@@ -61,21 +65,52 @@ public class KnightController : MonoBehaviour
 
         CheckGroundStatus();
 
-        if (isRightButtonPressed) {
-            transform.Translate(Vector3.right * m_speed * Time.deltaTime);
-        } else if (isLeftButtonPressed) {
-            transform.Translate(Vector3.left * m_speed * Time.deltaTime);
+        if (isLeftButtonPressed)
+        {
+            inputX = -1f;
+            FlipCharacter(true);
+        }
+        else if (isRightButtonPressed)
+        {
+            inputX = 1f;
+            FlipCharacter(false);
+        }
+        else
+        {
+            inputX = 0f;
         }
 
-        HandleAnimations();
+        m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
+        m_animator.SetFloat("AirSpeedY", m_body2d.velocity.y);
 
-        if (life <= 0) {
+        // Correr
+        if (Mathf.Abs(inputX) > Mathf.Epsilon)
+        {
+            // Reiniciar temporizador
+            m_delayToIdle = 0.05f;
+            m_animator.SetInteger("AnimState", 1);
+        }
+
+        // Inactividad
+        else
+        {
+            // Evitar transiciones parpadeantes a la inactividad
+            m_delayToIdle -= Time.deltaTime;
+            if (m_delayToIdle < 0)
+            {
+                m_animator.SetInteger("AnimState", 0);
+            }
+        }
+
+        if (life <= 0)
+        {
             TriggerDeathAnimation();
             SceneManager.LoadScene("DeathScene");
         }
 
         lastDamageTime = -damageCooldown;
     }
+
 
     private void InitializeComponents()
     {
@@ -242,15 +277,16 @@ public class KnightController : MonoBehaviour
     }
     private void HandleAttack()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
+        // Posición del jugador
+        Vector3 playerPosition = transform.position;
 
-        // Verificar colisión con objetos dentro del área de daño
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(mousePos, damageRadius);
+        // Obtener los colliders de los objetos dentro del área de daño
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPosition, damageRadius);
+        
         foreach (Collider2D collider in colliders)
         {
-            // Aplicar daño a los objetos (puedes personalizar esta lógica según tus necesidades)
-             if (collider.CompareTag("Enemy"))
+            // Aplicar daño a los objetos en el radio del ataque
+            if (collider.CompareTag("Enemy"))
             {
                 EnemyInterface enemy = collider.GetComponent<EnemyInterface>();
 
@@ -433,14 +469,34 @@ public class KnightController : MonoBehaviour
         }
     }
 
+    public void OnClickSelectItemTorch(){
+        imageButton.sprite = sprites[2];
+    }
 
-    private void FixedUpdate() {
-        if (isLeftButtonPressed) {
-            m_body2d.AddForce(new Vector2(-m_speed, 0f) * Time.deltaTime);
-        }
+    public void OnClickSelectItemHeal(){
+        imageButton.sprite = sprites[0];
+    }
 
-        if (isRightButtonPressed) {
-            m_body2d.AddForce(new Vector2(m_speed, 0f) * Time.deltaTime);
+    public void OnClickSelectItemSanity(){
+        imageButton.sprite = sprites[1];
+    }
+
+    public void OnClickObjectButton(){
+        if (imageButton.sprite == sprites[0]){
+            if(lifePotionQuantity > 0){
+                lifePotionQuantity--;
+                life += 20;
+            }
+        } else if (imageButton.sprite == sprites[1]){
+                if(sanityPotionQuantity > 0){
+                sanityPotionQuantity--;
+                sanity += 20;
+            }
+        } else if(imageButton.sprite == sprites[2]){
+                if (torchQuantity > 0){
+                    torchQuantity--;
+                    Instantiate(torch, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+                }
         }
     }
 }
