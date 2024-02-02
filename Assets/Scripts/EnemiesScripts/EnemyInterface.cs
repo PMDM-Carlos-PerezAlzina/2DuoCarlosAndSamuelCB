@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public abstract class EnemyInterface : MonoBehaviour
@@ -11,12 +12,6 @@ public abstract class EnemyInterface : MonoBehaviour
         Debug.Log("EnemyInterface Attack");
     }
 
-    // Método para el comportamiento de recibir daño
-    public virtual void TakeDamage()
-    {
-        life -= GameManager.damagePlayer;
-        Debug.Log("Life is: " + life);
-    }
 
     public virtual void Die(GameObject gameObject, GameObject deathObject)
     {
@@ -34,4 +29,5 @@ public abstract class EnemyInterface : MonoBehaviour
         // Obtener el Animator del nuevo GameObject
         Animator deathAnimator = deathAnimation.GetComponent<Animator>();
     }
+
 }

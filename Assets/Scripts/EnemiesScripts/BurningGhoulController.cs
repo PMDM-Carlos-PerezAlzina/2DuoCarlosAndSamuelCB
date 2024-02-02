@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BurningGhoulController : EnemyInterface
 {
@@ -16,6 +17,8 @@ public class BurningGhoulController : EnemyInterface
     public bool downInformation;
     public bool frontInformation;
     private bool isLookingRight = true;
+    private int maxLife = 100;
+    [SerializeField] private Image burningBar;
 
     // Update is called once per frame
     void Update()
@@ -45,5 +48,16 @@ public class BurningGhoulController : EnemyInterface
         Gizmos.color = Color.red;
         Gizmos.DrawLine(downController.transform.position, downController.transform.position + transform.up * -1 * distanceDown);
         Gizmos.DrawLine(frontController.transform.position, frontController.transform.position + transform.right * distanceFront);
+    }
+
+    public void UpdateHealtBar(float maxHealth, float currentHealth) {
+        burningBar.fillAmount = currentHealth / maxHealth;
+    }
+
+    public void TakeDamage()
+    {
+        life -= GameManager.damagePlayer;
+        UpdateHealtBar(100, life);
+        Debug.Log("Life is: " + life);
     }
 }

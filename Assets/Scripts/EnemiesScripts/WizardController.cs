@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WizardController : EnemyInterface
 {
@@ -14,6 +15,7 @@ public class WizardController : EnemyInterface
     public bool downInformation;
     public bool frontInformation;
     private bool isLookingRight = true;
+    [SerializeField] private Image wizardImage;
 
     // Update is called once per frame
     void Update()
@@ -44,5 +46,16 @@ public class WizardController : EnemyInterface
         Gizmos.color = Color.red;
         Gizmos.DrawLine(downController.transform.position, downController.transform.position + transform.up * -1 * distanceDown);
         Gizmos.DrawLine(frontController.transform.position, frontController.transform.position + transform.right * distanceFront);
+    }
+
+    public void UpdateHealtBar(float maxHealth, float currentHealth) {
+        wizardImage.fillAmount = currentHealth / maxHealth;
+    }
+
+    public void TakeDamage()
+    {
+        life -= GameManager.damagePlayer;
+        UpdateHealtBar(100, life);
+        Debug.Log("Life is: " + life);
     }
 }

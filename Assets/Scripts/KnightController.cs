@@ -307,6 +307,7 @@ public class KnightController : MonoBehaviour
         }
     }
 
+
     private void PerformJump()
     {
         m_animator.SetTrigger("Jump");
