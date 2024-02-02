@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KnightController : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class KnightController : MonoBehaviour
     private Sensor_HeroKnight m_wallSensorR2;
     private Sensor_HeroKnight m_wallSensorL1;
     private Sensor_HeroKnight m_wallSensorL2;
-    public GameObject knightColliderContainer;
     private bool m_isWallSliding = false;
     private bool m_grounded = false;
     private bool m_rolling = false;
@@ -31,6 +31,9 @@ public class KnightController : MonoBehaviour
     private float m_rollDuration = 8.0f / 14.0f;
     private float m_rollCurrentTime;
     private float sanity = 100f;
+    private float lastDamageTime;
+    public float damageCooldown = 5f;
+    public float damageRadius = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,13 @@ public class KnightController : MonoBehaviour
         HandleInputAndMovement();
 
         HandleAnimations();
+
+        if (life <= 0) {
+            TriggerDeathAnimation();
+            SceneManager.LoadScene("DeathScene");
+        }
+
+        lastDamageTime = -damageCooldown;
     }
 
     private void InitializeComponents()
@@ -125,20 +135,8 @@ public class KnightController : MonoBehaviour
         m_isWallSliding = (m_wallSensorR1.State() && m_wallSensorR2.State()) || (m_wallSensorL1.State() && m_wallSensorL2.State());
         m_animator.SetBool("WallSlide", m_isWallSliding);
 
-        // Death
-        if (Input.GetKeyDown("e") && !m_rolling)
-        {
-            TriggerDeathAnimation();
-        }
-
-        // Hurt
-        else if (Input.GetKeyDown("q") && !m_rolling)
-        {
-            m_animator.SetTrigger("Hurt");
-        }
-
         // Ataque
-        else if (Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling)
+        if (Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling)
         {
             PerformAttack();
             HandleAttack();
@@ -153,12 +151,6 @@ public class KnightController : MonoBehaviour
         else if (Input.GetMouseButtonUp(1))
         {
             m_animator.SetBool("IdleBlock", false);
-        }
-
-        // Rollo
-        else if (Input.GetKeyDown("left shift") && !m_rolling && !m_isWallSliding)
-        {
-            PerformRoll();
         }
 
         // Saltar
@@ -189,11 +181,12 @@ public class KnightController : MonoBehaviour
 
     private void MoveColliderWithCharacter()
     {
-        if (knightColliderContainer != null)
-        {
-            float newXPosition = m_facingDirection == -1 ? -1f : 0f;
-            knightColliderContainer.transform.localPosition = new Vector3(newXPosition, 0, 0);
-        }
+        //if (knightColliderContainer != null)
+        //{
+            
+            //knightColliderContainer.transform.localPosition = new Vector3(newXPosition, 0, 0);
+        //}
+        float newXPosition = m_facingDirection == -1 ? -1f : 0f;
     }
 
     private void FlipCharacter(bool flipX)
@@ -228,17 +221,17 @@ public class KnightController : MonoBehaviour
     }
     private void HandleAttack()
     {
-        // Obtener el tamaño del BoxCollider2D del enemigo
-        Vector2 boxSize = new Vector2(1.5f, 1.5f);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
 
-        // Lógica para verificar y dañar enemigos
-        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(transform.position, boxSize, 0f);
-
-        foreach (Collider2D hitCollider in hitColliders)
+        // Verificar colisión con objetos dentro del área de daño
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(mousePos, damageRadius);
+        foreach (Collider2D collider in colliders)
         {
-            if (hitCollider.CompareTag("Enemy"))
+            // Aplicar daño a los objetos (puedes personalizar esta lógica según tus necesidades)
+             if (collider.CompareTag("Enemy"))
             {
-                EnemyInterface enemy = hitCollider.GetComponent<EnemyInterface>();
+                EnemyInterface enemy = collider.GetComponent<EnemyInterface>();
 
                 if (enemy != null)
                 {
@@ -270,12 +263,42 @@ public class KnightController : MonoBehaviour
         m_groundSensor.Disable(0.2f);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private IEnumerator ResetWizardAnimationToIdle(Animator wizardAnimator)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        yield return new WaitForSeconds(1f);
+        wizardAnimator.SetTrigger("Idle");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
         {
-            // Realizar acciones específicas cuando colisiona con un enemigo
-            Debug.Log("Ghost ha colisionado con un enemigo");
+            if (other.GetComponent<WizardController>() != null)
+            {
+                // Obtener el Animator del Wizard
+                Animator wizardAnimator = other.GetComponent<WizardController>().GetComponent<Animator>();
+
+                // Activar la animación de ataque del Wizard
+                wizardAnimator.SetTrigger("Attack");
+
+                // Esperar un segundo y luego restablecer la animación del Wizard al estado Idle
+                StartCoroutine(ResetWizardAnimationToIdle(wizardAnimator));
+            }
+
+            // Realizar la animación de daño del jugador y aplicar el daño
+            m_animator.SetTrigger("Hurt");
+            TakeDamage();
         }
+    }
+
+
+    public void TakeDamage()
+    {
+        life -= 20;
+
+        // Aplicar fuerza hacia atrás al recibir daño
+        Vector2 knockbackForce = new Vector2(-5f * m_facingDirection, 5f);
+        m_body2d.velocity = Vector2.zero; // Detener el movimiento actual antes de aplicar la fuerza
+        m_body2d.AddForce(knockbackForce, ForceMode2D.Impulse);
     }
 }
