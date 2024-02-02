@@ -1,15 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TuScript : MonoBehaviour
+public class CanvasController : MonoBehaviour
 {
     public Sprite[] lifeImages;
     public Sprite[] sanityImages;
-    public Text inventoryText;
     public Image lifeImage;
     public Image sanityImage;
     public GameObject player;
     private KnightController knight;
+    public Text lifePotionsText;
+    public Text sanityPotionsText;
+    public Text torchText;
 
     // ... (otras variables y métodos)
 
@@ -83,19 +85,13 @@ public class TuScript : MonoBehaviour
     // Método para actualizar la UI del inventario
     void UpdateInventoryUI()
     {
-        // Construir una cadena que representa el inventario
-        string inventoryString = "Inventory: ";
-
         // Obtener la cantidad de cada elemento del inventario desde GameManager
         int torchQuantityLocal = knight.torchQuantity;
         int lifePotionQuantityLocal = knight.lifePotionQuantity;
         int sanityPotionQuantityLocal = knight.sanityPotionQuantity;
-
         // Agregar la cantidad de cada elemento al texto del inventario
-        inventoryString += "Torches: " + torchQuantityLocal + " | Life Potions: " + lifePotionQuantityLocal + " | Sanity Potions: " + sanityPotionQuantityLocal;
-
-        // Actualizar el texto del inventario en la UI
-        inventoryText.text = inventoryString;
+        sanityPotionsText.text = sanityPotionQuantityLocal.ToString();
+        lifePotionsText.text = lifePotionQuantityLocal.ToString();
+        torchText.text = torchQuantityLocal.ToString();
     }
-
 }

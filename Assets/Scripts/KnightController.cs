@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class KnightController : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class KnightController : MonoBehaviour
     public GameObject enemyPrefab1;
     public GameObject enemyPrefab2;
     public GameObject enemyPrefab3;
+    public Canvas canvas;
 
     // Start is called before the first frame update
     void Start()
@@ -153,7 +155,11 @@ public class KnightController : MonoBehaviour
         // Bloquear
         else if (Input.GetMouseButtonDown(1) && !m_rolling)
         {
-            Instantiate(torch, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            Text[] texts = canvas.GetComponentsInChildren<Text>();
+            if (torchQuantity > 0) {
+                torchQuantity--;
+                Instantiate(torch, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            }
         }
 
         else if (Input.GetMouseButtonUp(1))
