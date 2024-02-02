@@ -50,6 +50,11 @@ public class KnightController : MonoBehaviour
     public Sprite[] sprites;
     public Image imageButton;
 
+    public AudioSource soundBrandishSword;
+    public AudioSource soundHitSwordMosnter;
+
+    public AudioSource soundHurt;
+
 
     // Start is called before the first frame update
     void Start()
@@ -272,6 +277,9 @@ public class KnightController : MonoBehaviour
         // Llamar a una de las tres animaciones de ataque "Attack1", "Attack2", "Attack3"
         m_animator.SetTrigger("Attack" + m_currentAttack);
 
+        //Ejecuta el sonido
+        soundBrandishSword.Play();
+
         // Reiniciar temporizador
         m_timeSinceAttack = 0.0f;
     }
@@ -293,6 +301,7 @@ public class KnightController : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.TakeDamage(); // Llama al método de la interfaz
+                    soundHitSwordMosnter.Play();
                 }
             }
         }
@@ -418,6 +427,7 @@ public class KnightController : MonoBehaviour
         Vector2 knockbackForce = new Vector2(-5f * m_facingDirection, 5f);
         m_body2d.velocity = Vector2.zero; 
         m_body2d.AddForce(knockbackForce, ForceMode2D.Impulse);
+        soundHurt.Play();
     }
 
     public void IncreasePotionSanity() {
@@ -440,6 +450,7 @@ public class KnightController : MonoBehaviour
     public void HandleRightButtonClick()
     {
         isRightButtonPressed = true;
+        Debug.Log("Right Button Pressed");
     }
     
     public void HandleLeftButtonRelease()
@@ -499,4 +510,20 @@ public class KnightController : MonoBehaviour
                 }
         }
     }
+
+    public void OnTriggerEnterDoorLevelOne(Collider other){
+        if (other.gameObject.tag == "EndFirstLevel")
+        {
+            SceneManager.LoadScene("WinLevelScene");
+        }
+    }
+
+        public void OnTriggerEnterDoorLevelTwo(Collider other){
+        if (other.gameObject.tag == "EndSecondLevel")
+        {
+            SceneManager.LoadScene("FinalWin");
+        }
+    }
+
+
 }
