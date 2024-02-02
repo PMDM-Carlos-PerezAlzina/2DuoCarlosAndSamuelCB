@@ -43,6 +43,9 @@ public class KnightController : MonoBehaviour
     public GameObject enemyPrefab2;
     public GameObject enemyPrefab3;
     public Canvas canvas;
+    private bool isLeftButtonPressed = false;
+    private bool isRightButtonPressed = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +61,11 @@ public class KnightController : MonoBehaviour
 
         CheckGroundStatus();
 
-        HandleInputAndMovement();
+        if (isRightButtonPressed) {
+            transform.Translate(Vector3.right * m_speed * Time.deltaTime);
+        } else if (isLeftButtonPressed) {
+            transform.Translate(Vector3.left * m_speed * Time.deltaTime);
+        }
 
         HandleAnimations();
 
@@ -115,7 +122,7 @@ public class KnightController : MonoBehaviour
 
     private void HandleInputAndMovement()
     {
-        float inputX = Input.GetAxis("Horizontal");
+        float inputX = Input.touchCount > 0 ? Mathf.Sign(Input.GetTouch(0).position.x - Screen.width / 2) : 0;
 
         // Cambiar dirección del sprite según la dirección de movimiento
         if (inputX > 0)
@@ -146,14 +153,14 @@ public class KnightController : MonoBehaviour
         m_animator.SetBool("WallSlide", m_isWallSliding);
 
         // Ataque
-        if (Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling)
-        {
-            PerformAttack();
-            HandleAttack();
-        }
+        //if (Input.GetMouseButtonDown(0) && m_timeSinceAttack > 0.25f && !m_rolling)
+        //{
+            //PerformAttack();
+          //  HandleAttack();
+        //}
 
         // Bloquear
-        else if (Input.GetMouseButtonDown(1) && !m_rolling)
+        if (Input.GetMouseButtonDown(1) && !m_rolling)
         {
             Text[] texts = canvas.GetComponentsInChildren<Text>();
             if (torchQuantity > 0) {
@@ -253,19 +260,6 @@ public class KnightController : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void TriggerBlockAnimation()
-    {
-        m_animator.SetTrigger("Block");
-        m_animator.SetBool("IdleBlock", true);
-    }
-
-    private void PerformRoll()
-    {
-        m_rolling = true;
-        m_animator.SetTrigger("Roll");
-        m_body2d.velocity = new Vector2(m_facingDirection * m_rollForce, m_body2d.velocity.y);
     }
 
     private void PerformJump()
@@ -400,5 +394,53 @@ public class KnightController : MonoBehaviour
 
     public void IncreaseTorch() {
         torchQuantity++;
+    }
+
+    public void HandleLeftButtonClick()
+    {
+        isLeftButtonPressed = true;
+    }
+
+    public void HandleRightButtonClick()
+    {
+        isRightButtonPressed = true;
+    }
+    
+    public void HandleLeftButtonRelease()
+    {
+        isLeftButtonPressed = false;
+    }
+
+    public void HandleRightButtonRelease()
+    {
+        isRightButtonPressed = false;
+    }
+
+    public void HandleAttackButtonClick()
+    {
+        if (m_timeSinceAttack > 0.25f && !m_rolling)
+        {
+            PerformAttack();
+            HandleAttack();
+        }
+    }
+
+    public void HandleJumpButtonClick()
+    {
+        if (m_grounded && !m_rolling)
+        {
+            PerformJump();
+        }
+    }
+
+
+    private void FixedUpdate() {
+        if (isLeftButtonPressed) {
+            m_body2d.AddForce(new Vector2(-m_speed, 0f) * Time.deltaTime);
+        }
+
+        if (isRightButtonPressed) {
+            m_body2d.AddForce(new Vector2(m_speed, 0f) * Time.deltaTime);
+        }
     }
 }

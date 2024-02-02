@@ -9,6 +9,14 @@ TagManager:
   - Light
   - EndFirstLevel
   - EndSecondLevel
+  - GoLeft
+  - GoRight
+  - Attack
+  - Jump
+  - Use
+  - PotionHeal
+  - PotionSanity
+  - Torch
   layers:
   - Default
   - TransparentFX

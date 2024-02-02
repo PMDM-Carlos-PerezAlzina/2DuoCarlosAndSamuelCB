@@ -5,7 +5,6 @@ using UnityEngine;
 public class Sensor_HeroKnight : MonoBehaviour
 {
     private int m_ColCount = 0;
-
     private float m_DisableTimer;
 
     private void OnEnable()
@@ -22,12 +21,20 @@ public class Sensor_HeroKnight : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        m_ColCount++;
+        // Verificar la capa del objeto colisionado (reemplaza "Ground" con el nombre de tu capa)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            m_ColCount++;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        m_ColCount--;
+        // Verificar la capa del objeto colisionado (reemplaza "Ground" con el nombre de tu capa)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            m_ColCount--;
+        }
     }
 
     void Update()
