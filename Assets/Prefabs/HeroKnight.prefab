@@ -240,10 +240,18 @@ MonoBehaviour:
   m_noBlood: 0
   m_slideDust: {fileID: 1038168246061390451, guid: 987ae5c081ee3db268c5eda6de270f39, type: 3}
   reboundSpeed: {x: 0, y: 0}
+  torchQuantity: 3
+  lifePotionQuantity: 1
+  sanityPotionQuantity: 1
   life: 100
-  damageAttack: 20
+  sanity: 100
   damageCooldown: 5
   damageRadius: 5
+  torch: {fileID: 4803055305270320010, guid: bbd86c98e2e88565ca82b88832a27c91, type: 3}
+  enemyPrefab1: {fileID: 3842532864880808580, guid: dbcd0d8f80a89a0de963dbd4add334a7, type: 3}
+  enemyPrefab2: {fileID: 4742267209714280249, guid: 073a8cd4caa71d2f58fd0ebb6cdb5650, type: 3}
+  enemyPrefab3: {fileID: 8762367356632381820, guid: 9e5d6a03ec9e6a1588cafbea2b07db72, type: 3}
+  canvas: {fileID: 0}
 --- !u!114 &8232728973008539143
 MonoBehaviour:
   m_ObjectHideFlags: 0
