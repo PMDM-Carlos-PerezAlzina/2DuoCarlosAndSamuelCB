@@ -55,6 +55,8 @@ public class KnightController : MonoBehaviour
 
     public AudioSource soundHurt;
 
+        private bool alreadySuscribed = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +68,14 @@ public class KnightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(!alreadySuscribed){
+            DestroyFire.OnEnemigoDerrotado += RecogerRecompensa;
+            alreadySuscribed = true;
+        }
+
+
+
         HandleTimers();
 
         CheckGroundStatus();
@@ -346,10 +356,10 @@ public class KnightController : MonoBehaviour
             TakeDamage();
         }
         if (other.CompareTag("EndFirstLevel")) {
-            SceneManager.LoadScene("SecondLevel");
+            SceneManager.LoadScene("WinLevelScene");
         }
         if (other.CompareTag("EndSecondLevel")) {
-            SceneManager.LoadScene("WinLevelScene");
+            SceneManager.LoadScene("FinalWin");
         }
     }
 
@@ -511,19 +521,36 @@ public class KnightController : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnterDoorLevelOne(Collider other){
-        if (other.gameObject.tag == "EndFirstLevel")
-        {
-            SceneManager.LoadScene("WinLevelScene");
-        }
+    void OnDisable()
+    {
+        DestroyFire.OnEnemigoDerrotado -= RecogerRecompensa;
+        alreadySuscribed = false;
     }
 
-        public void OnTriggerEnterDoorLevelTwo(Collider other){
-        if (other.gameObject.tag == "EndSecondLevel")
-        {
-            SceneManager.LoadScene("FinalWin");
-        }
-    }
+    void RecogerRecompensa()
+    {
+       {
+           int randomValue2 = Random.Range(1, 4);
+           Debug.Log("Random value: " + randomValue2);
+                   switch (randomValue2)
+                   {
+                       case 1:
+                           torchQuantity++;
+                           break;
+                       case 2:
+                           lifePotionQuantity++;
+                           break;
+                       case 3:
+                           sanityPotionQuantity++;
+                           break;
+                       default:
+                           break;
+                   }
+       }
 
+        DestroyFire.OnEnemigoDerrotado -= RecogerRecompensa;
+        alreadySuscribed = false;
+
+    }
 
 }
