@@ -4,7 +4,7 @@
 
 Este es un juego de estilo Castlevania con una mecánica de oscuridad y cordura. El juego está completamente en inglés.
 
-Enlace: https://youtu.be/svXhnez2HYU
+Enlace: https://youtu.be/VryhL22q_Og
 
 ## Características
 
